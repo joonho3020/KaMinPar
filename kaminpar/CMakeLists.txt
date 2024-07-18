@@ -75,7 +75,8 @@ target_include_directories(kaminpar_impl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 # Link TBB
 find_package(Threads REQUIRED)
 find_package(TBB REQUIRED)
-target_link_libraries(kaminpar_impl PUBLIC ${TBB_LIBRARIES})
+find_library(NUMA_LIB numa)
+target_link_libraries(kaminpar_impl PUBLIC TBB::tbb TBB::tbbmalloc)
 target_include_directories(kaminpar_impl PUBLIC ${TBB_INCLUDE_DIRS})
 
 # Link libnuma on Linux

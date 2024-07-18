@@ -7,8 +7,14 @@ function get_num_cores {
 git submodule update --init
 
 PROJECT_ROOT=$(pwd)
+
+if [ -d build ]; then
+  echo "REMOVING"
+  rm -rf build
+fi
+
 if [ ! -f build/Makefile ]; then
-  ADDITIONAL_COMMANDS=""
+  ADDITIONAL_COMMANDS="-DCMAKE_INCLUDE_PATH=$CONDA_PREFIX"
 
   mkdir -p build &&
     cd build &&
